@@ -13,29 +13,29 @@
 
 <body>
   <header>
-    <h1>Vue Course Goals</h1>
+    <h1>Vue Lists and Conditional Content</h1>
   </header>
-  <section id="user-goals">
-    <h2>My course goals</h2>
-    <input type="text" v-model="enteredGoalValue" />
-    <button @click="addGoal">Add Goal</button>
-    <p v-if="goals.length === 0">
-      No goals have been added yet - please start adding some!
-    </p>
-    <ul v-else>
-      <li v-for="(goal, index) in goals" :key="goal">
-        <p>{{ goal }} - {{ index }}</p>
-        <input type="text" @click.stop>
-        <button @click="removeGoal(index)">Delete task</button>
+  <section id="assignment">
+    <h2>Task List:</h2>
+    <!-- 1) Add code to manage a list of tasks in a Vue app -->
+    <!-- When clicking "Add Task" a new task with the entered text should be added --------------OK -->
+    <input type="text" v-model="inputValue" @keyup.enter="addTask">
+    <button @click="addTask">Add Task</button>
+    <ul v-if="listVisible">
+      <!-- 2) Output the list of tasks here --------------OK -->
+      <li v-for="(task, index) in tasks" :key="index">
+        <p>
+          {{index}}: {{task}}
+          <input type="text" v-model="editValue">
+          <button @click="editTask(index)">Edit Task</button>
+          <button @click="removeTask(index)">Remove task</button>
+        </p>
 
       </li>
     </ul>
-    <!-- <ul>
-        <li v-for="num in 10">{{ num }}</li>
-      </ul> -->
-    <ul>
-      <li v-for="(value, key, index) in {name: 'Max', age: 31}">{{ key }}: {{ value }} - {{ index }}</li>
-    </ul>
+    <!-- 3) When the below button is pressed, the list should be shown or hidden --------------OK -->
+    <!-- BONUS: Also update the button caption -->
+    <button @click="hideOrShowTasksList">{{ buttonText }}</button>
   </section>
 </body>
 
